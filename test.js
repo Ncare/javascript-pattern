@@ -8,7 +8,7 @@ var currying = function(fn) {
       return fn.apply(this, args)
     }else {
       [].push.apply(args, arguments)
-      return arguments.callee
+      return arguments.callee         // 返回正在执行的Function对象
     }
   }
 }
