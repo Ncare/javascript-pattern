@@ -65,3 +65,32 @@ console.log(a===b)
 // 但是要尽量避免使用全部变量
 
 // 使用命名空间将变量包含起来
+
+
+// 惰性单例
+
+var getSingle = function(fn) {
+  
+  var result
+
+  // 闭包，缓存
+  return function() {
+    return result || (result = fn.apply(this, arguments))
+  }
+}
+
+var createModal = function() {
+  var div =  document.createElement('div')
+  div.innerHTML = '测试'
+  div.style.display = 'none'
+  document.body.appendChild(div)
+  return div
+}
+
+var Modal = getSingle(createModal)
+
+document.getElementById('btn').onclick = function() {
+  
+  var modal = Modal()
+  modal.style.display = 'block'
+}
